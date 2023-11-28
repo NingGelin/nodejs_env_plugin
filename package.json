@@ -1,23 +1,23 @@
 {
-  "name": "nodejs_env_plugin",
-  "displayName": "nodejs_env_plugin",
+  "name": "env-parsing-for-nodejs",
+  "displayName": "Env Parsing For NodeJS",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "publisher": "GelinNing",
   "engines": {
     "vscode": "^1.84.0"
   },
+  "icon": "logo.png",
+  "repository": "https://github.com/NingGelin/nodejs_env_plugin",
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:typescript"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "nodejs-env-plugin.helloWorld",
-        "title": "Hello World"
-      }
-    ]
+    "commands": []
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -31,18 +31,19 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.84.0",
     "@types/mocha": "^10.0.3",
     "@types/node": "18.x",
+    "@types/vscode": "^1.84.0",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
+    "@vscode/test-electron": "^2.3.6",
     "eslint": "^8.52.0",
     "glob": "^10.3.10",
     "mocha": "^10.2.0",
-    "typescript": "^5.2.2",
     "ts-loader": "^9.5.0",
+    "typescript": "^5.2.2",
     "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4",
-    "@vscode/test-electron": "^2.3.6"
-  }
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {}
 }

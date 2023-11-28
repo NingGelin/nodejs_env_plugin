@@ -1,9 +1,11 @@
-# Change Log
+# Changelog
 
-All notable changes to the "nodejs-env-plugin" extension will be documented in this file.
+All notable changes to the "Env Parsing For NodeJS" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [0.0.1] - 2023-11-18
 
-## [Unreleased]
+- Initial Version
 
-- Initial release
+## [0.0.2] - 2023-11-18
+
+- Completing project information
