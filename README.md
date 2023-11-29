@@ -2,12 +2,13 @@
 
 ## Features
 
-- support to jump into .env file by process.env.{configurationName}
+- support jumping into .env file by clicking process.env.{configurationName}
+- support syntax highlighting for .env file
+- support jumping to location referring key that in .env file
 
 ## Requirements
 
-- [x] support to jump into .env file by process.env.{configurationName}
-- [ ] support syntax highlighting for .env file
+- [ ] support prompt and auto-completing when typing the process.env.
 
 ## Known Issues
 

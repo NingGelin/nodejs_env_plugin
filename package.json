@@ -2,7 +2,7 @@
   "name": "env-parsing-for-nodejs",
   "displayName": "Env Parsing For NodeJS",
   "description": "",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "GelinNing",
   "engines": {
     "vscode": "^1.84.0"
@@ -13,11 +13,29 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:typescript"
+    "onLanguage:typescript",
+    "onLanguage:javascript",
+    "onLanguage:env"
   ],
   "main": "./dist/extension.js",
   "contributes": {
-    "commands": []
+    "commands": [],
+    "languages": [
+      {
+        "id": "env",
+        "extensions": [
+          ".env",
+          ".env.example"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "env",
+        "scopeName": "source.env",
+        "path": "./syntaxes/env.tmGrammar.json"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run package",

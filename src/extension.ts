@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import path from "path";
 import * as vscode from "vscode";
 
 interface EnvItem {
@@ -36,6 +37,40 @@ export function activate(context: vscode.ExtensionContext) {
       },
     })
   );
+
+  context.subscriptions.push(
+    vscode.languages.registerDefinitionProvider(["env"], {
+      async provideDefinition(document, position, token) {
+        const fileName = document.fileName;
+        const tempArray = fileName.split("/");
+        tempArray.pop();
+        const parentDir = tempArray.join("/");
+        console.log(parentDir);
+
+        const configurationItem = "process.env." + document.getText(document.getWordRangeAtPosition(position));
+        console.log(configurationItem);
+
+        const vsCodeLocations: vscode.Location[] = [];
+        getAllTsFilesInDirectory(parentDir + "/src").forEach((file) => {
+          const fileContent = fs.readFileSync(file, "utf-8");
+          if (fileContent.indexOf("process.env") == -1) {
+            return;
+          } else {
+            const lines = fileContent.split("\n");
+            lines.forEach((line, index) => {
+              if (line.includes(configurationItem)) {
+                const column = line.indexOf("process.env");
+                vsCodeLocations.push(
+                  new vscode.Location(vscode.Uri.file(file), new vscode.Position(index, column + 12))
+                );
+              }
+            });
+          }
+        });
+        return vsCodeLocations;
+      },
+    })
+  );
 }
 
 function parseEnvFile(envPath: string): EnvItem[] {
@@ -56,6 +91,23 @@ function parseEnvFile(envPath: string): EnvItem[] {
     });
   }
   return envItems;
+}
+
+function getAllTsFilesInDirectory(directoryPath: string): string[] {
+  const files: string[] = [];
+
+  fs.readdirSync(directoryPath).forEach((file: string) => {
+    const filePath = path.join(directoryPath, file);
+    const stat = fs.statSync(filePath);
+
+    if (stat.isFile() && path.extname(filePath) === ".ts") {
+      files.push(filePath);
+    } else if (stat.isDirectory()) {
+      files.push(...getAllTsFilesInDirectory(filePath));
+    }
+  });
+
+  return files;
 }
 
 // This method is called when your extension is deactivated
